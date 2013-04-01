@@ -9,8 +9,8 @@ code for each small sketch which uses an external EEPROM chip to store some data
 This small library does the hard work of interfacing the external chip exposing 
 a set of common operations which are useful when working with EEPROM chips. 
 
-The following layout (using the Arduino UNO board) is taken as reference while working with this library:
-![eeprom_layout](examples/24LC1025_bb_small.png)
+The following layout ([fritzing file](docs/24LC1025.fzz)) is taken as reference while working with this library using the Arduino UNO R3 board:
+![eeprom_layout](docs/24LC1025_bb_small.png)
 
 Keep in mind that some features are missing but feel free to clone the git repository and send a pull request for any suggestion.
 
