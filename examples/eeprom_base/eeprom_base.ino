@@ -4,10 +4,11 @@
   Licensed under MIT license, see LICENSE.md
  */
 
-#include <EEPROM_24XX1025.h>
+#include <Wire.h>     
+#include <EEPROM24.h>
 
 // init eeprom with default address
-EEPROM_24XX1025 eeprom();
+EEPROM24 eeprom;
 
 // example: bytes to be read with a single loop
 #define READ_BYTES 32
@@ -17,7 +18,7 @@ EEPROM_24XX1025 eeprom();
 
 // variables
 int i = 0;
-int curr_addr = 0;
+unsigned int curr_addr = 0;
 
 void setup() {
   // initialize serial communications at 9600 bps

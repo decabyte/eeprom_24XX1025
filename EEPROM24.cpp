@@ -5,41 +5,51 @@
  */
 
 #include "Arduino.h"
-#include "Wire.h"
-#include "EEPROM_24X1025.h"
+#include "EEPROM24.h"
+#include <Wire.h>
+
+// TWI clock frequency (400 kHz)
+#define TWI_FREQ_FAST 400000L
+
+// default config (address & speed)
+#define EEPROM24_ADDR B10100000
+#define EEPROM24_FAST false
 
 /**
- * 
+ * Default constructor (using default address and low speed)
  */
-EEPROM_24X1025::EEPROM_24X1025() 
+EEPROM24::EEPROM24() 
 {
-  EEPROM_24X1025::EEPROM_24X1025(EEPROM_24X1025_ADDR, EEPROM_24X1025_FAST);
+  EEPROM24::EEPROM24(EEPROM24_ADDR, false);
 }
 
 /**
- * 
+ * Standard constructor using address and fast flag.
+ * It initializes the Wire library.
  */
-EEPROM_24X1025::EEPROM_24X1025(byte address, bool fast)
+EEPROM24::EEPROM24(byte address, bool fast)
 {
   _address = address;
+  _fast = fast;
 
   // init Wire library
   Wire.begin();
 
   // change TWI base clock
-  if(fast)
-    TWBR = ((CPU_FREQ / TWI_FREQ_FAST) - 16) / 2;
+  if(fast) {
+    TWBR = ((F_CPU / TWI_FREQ_FAST) - 16) / 2;
+  }
 }
 
 /**
- * [EEPROM_24X1025::read description]
+ * [EEPROM24::read description]
  * @param  eeprom_addr [description]
  * @return             [description]
  */
-int EEPROM_24X1025::read(unsigned int eeprom_addr)
+int EEPROM24::read(unsigned int eeprom_addr)
 {
   byte i2c_status = 0;
-  byte i2c_addr = _address;
+  int i2c_addr = (int) _address;
   int ee_out = 0;
   
   // swap chip (for daisy-chained eeproms)
@@ -70,14 +80,14 @@ int EEPROM_24X1025::read(unsigned int eeprom_addr)
 }
 
 /**
- * [EEPROM_24X1025::write description]
+ * [EEPROM24::write description]
  * @param  eeprom_addr [description]
  * @param  data        [description]
  * @return             [description]
  */
-int EEPROM_24X1025::write(unsigned int eeprom_addr, byte data)
+int EEPROM24::write(unsigned int eeprom_addr, byte data)
 {
-  byte i2c_addr = ctrl_24fc1025;
+  int i2c_addr = (int) _address;
   
   if( eeprom_addr > 65535 )
     i2c_addr = i2c_addr | B00001000;    
