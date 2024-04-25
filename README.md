@@ -4,17 +4,15 @@ Arduino 24XX1025 EEPROM Library
 __Arduino 24XX1025 EEPROM Library__ is a small library that helps to
 interface external 24XX1025 series EEPROMs to Arduino code.
 
-I wrote this library while working on a side project to avoid writing the same
-code for each small sketch which uses an external EEPROM chip to store some data.
-This small library does the hard work of interfacing the external chip exposing 
+I wrote this library while working on a side project and avoid writing the same
+code for each small sketch which uses an external EEPROM chip to store data.
+This small library does the heavy lifting of interfacing the external chip exposing 
 a set of common operations which are useful when working with EEPROM chips. 
 
 The following layout ([fritzing file](docs/24LC1025.fzz)) is taken as reference while working with this library using the Arduino UNO R3 board:
 ![eeprom_layout](docs/24LC1025_bb_small.png)
 
 Keep in mind that some features are missing but feel free to clone the git repository and send a pull request for any suggestion.
-
-For more info about this project: [http://decabyte.it/projects/arduino-24xx1025-eeprom-library/](http://decabyte.it/projects/arduino-24xx1025-eeprom-library/).
 
 ## Usage
 
@@ -29,7 +27,7 @@ Look inside [examples](examples) directory for a couple of usage examples.
 
 ## LICENSE - "MIT License"
 
-Copyright (c) 2012-2013 Valerio De Carolis, http://decabyte.it
+Copyright (c) 2012-2013 Valerio De Carolis, http://decabyte.us
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
